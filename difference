@@ -1,0 +1,30 @@
+import pandas as pd
+import os
+
+# define file paths
+input_file = r'C:\Users\Nicholas\Downloads\student_grades.csv'  # raw string for Windows path
+output_file = r'C:\Users\Nicholas\Downloads\student_grade_differences.csv'
+
+# Check if the file exists before proceeding
+if not os.path.exists(input_file):
+    print(f"Error: The file {input_file} was not found.")
+else:
+    try:
+        # read the csv file
+        df = pd.read_csv(input_file)
+        
+            # calculate the average grade
+        average_grade = df["grade"].mean()
+
+            # calculate the difference between each student's grade and the average
+        df["difference"] = df["grade"] - average_grade
+
+            # write the output to a new file
+        df.to_csv(output_file, index=False)
+
+        print("student_grade_differences.csv has been created successfully.")
+
+    except Exception as e:
+        print(f"An error occurred while processing the file: {e}")
+
+    input("Press Enter to close...")
