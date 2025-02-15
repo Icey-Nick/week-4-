@@ -1,0 +1,26 @@
+try:
+      with open(r'C:\Users\Nicholas\Downloads\student_grades.csv', 'r') as f:
+
+        lines = f.readlines()
+
+        if len(lines) > 1:
+            grades = []
+
+            for line in lines[1:]:
+                row = line.strip().split(',')
+
+                try:
+                    grades.append(float(row[3]))
+                except ValueError:
+                    print(f"Error converting grade to float for line: {line}")
+                    continue
+
+            avg = sum(grades) / len(grades)
+            print(f'The average grade for the class is: {avg:.2f}')
+        else:
+            print('No student data found.')
+
+except FileNotFoundError:
+    print('Error: The file "student_grades.csv" was not found.')
+
+input("Press Enter to close...")
